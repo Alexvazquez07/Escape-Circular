@@ -49,16 +49,16 @@ let moveUp = false;
 let moveDown = false;
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowLeft" || e.key === "a") moveLeft = true;
-  if (e.key === "ArrowRight" || e.key === "d") moveRight = true;
-  if (e.key === "ArrowUp" || e.key === "w") moveUp = true;
-  if (e.key === "ArrowDown" || e.key === "s") moveDown = true;
+  if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") moveLeft = true;
+  if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") moveRight = true;
+  if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") moveUp = true;
+  if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") moveDown = true;
 });
 document.addEventListener("keyup", (e) => {
-  if (e.key === "ArrowLeft" || e.key === "a") moveLeft = false;
-  if (e.key === "ArrowRight" || e.key === "d") moveRight = false;
-  if (e.key === "ArrowUp" || e.key === "w") moveUp = false;
-  if (e.key === "ArrowDown" || e.key === "s") moveDown = false;
+  if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") moveLeft = false;
+  if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") moveRight = false;
+  if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") moveUp = false;
+  if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") moveDown = false;
 });
 
 camera.position.z = 12;
