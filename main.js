@@ -121,10 +121,10 @@ function animate() {
     });
 
     // Movimiento jugador
-    if (moveLeft) player.position.x -= 0.2;
-    if (moveRight) player.position.x += 0.2;
-    if (moveUp) player.position.y += 0.2;
-    if (moveDown) player.position.y -= 0.2;
+    if (moveLeft) player.position.x -= 0.1;
+    if (moveRight) player.position.x += 0.1;
+    if (moveUp) player.position.y += 0.1;
+    if (moveDown) player.position.y -= 0.1;
 
     // Limitar jugador dentro del tubo (radio 5.5, centro en y = -2)
     const dist = Math.sqrt(player.position.x ** 2 + (player.position.y + 2) ** 2);
