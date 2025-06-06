@@ -5,6 +5,10 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight * 0.9);
 document.getElementById("game-container").appendChild(renderer.domElement);
 
+let highScore = localStorage.getItem("highScore") || 0;
+const highScoreDisplay = document.getElementById("highScore");
+
+highScoreDisplay.textContent = "High Score: " + highScore;
 // Tubo
 const tubeGeometry = new THREE.CylinderGeometry(6, 6, 100, 32, 1, true);
 const tubeMaterial = new THREE.MeshBasicMaterial({
@@ -75,6 +79,11 @@ const retryBtn = document.getElementById("retry-btn");
 
 function showGameOver() {
   gameOver = true;
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem("highScore", highScore);
+  }
+  highScoreDisplay.textContent = "High Score: " + highScore;
   gameOverOverlay.style.display = "flex";
 }
 
