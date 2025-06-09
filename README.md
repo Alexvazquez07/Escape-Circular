@@ -38,11 +38,8 @@ EscapeCircular/
 🚧 En desarrollo. Futuras mejoras previstas:
 
 - Añadir música y efectos de sonido
-- Ajustar la dificultad progresivamente
 - Incluir animaciones de explosión al perder
 - Tabla de puntuaciones
-- Register/Login de usuarios
-- Registrar puntuaciones de los usuarios
 
 ## 📦 Instalación y ejecución local
 
