@@ -18,7 +18,7 @@ window.addEventListener("resize", () => {
   renderer.setSize(width, height);
 });
 
-let highScore = localStorage.getItem("highScore") || 0;
+let highScore = localStorage.getItem("highScore_escape") || 0;
 const highScoreDisplay = document.getElementById("highScore");
 
 highScoreDisplay.textContent = "High Score: " + highScore;
@@ -99,7 +99,7 @@ function showGameOver() {
   gameOver = true;
   if (score > highScore) {
     highScore = score;
-    localStorage.setItem("highScore", highScore);
+    localStorage.setItem("highScore_escape", highScore);
   }
   highScoreDisplay.textContent = "High Score: " + highScore;
   gameOverOverlay.style.display = "flex";
