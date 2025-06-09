@@ -1,9 +1,22 @@
 // Escena, cámara y renderer
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(80, window.innerWidth / (window.innerHeight * .9), 0.1, 1000);
+const aspect = window.innerWidth / (window.innerHeight * 0.9);
+const camera = new THREE.PerspectiveCamera(80, aspect, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight * 0.9);
 document.getElementById("game-container").appendChild(renderer.domElement);
+
+const difficultyBar = document.getElementById("difficulty-bar");
+let difficultyProgress = 30;
+
+
+window.addEventListener("resize", () => {
+  const width = window.innerWidth;
+  const height = window.innerHeight * 0.9;
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height);
+});
 
 let highScore = localStorage.getItem("highScore") || 0;
 const highScoreDisplay = document.getElementById("highScore");
@@ -71,6 +84,11 @@ let clock = new THREE.Clock();
 let spawnTimer = 0;
 let gameOver = false;
 let score = 0;
+
+let obstacleSpeed = 0.1;
+let spawnInterval = 4.5;
+let difficultyTimer = 0;
+
 const scoreDisplay = document.getElementById("score");
 
 // Elementos para el overlay de game over
@@ -92,7 +110,11 @@ retryBtn.addEventListener("click", () => {
   gameOverOverlay.style.display = "none";
   score = 0;
   scoreDisplay.textContent = "Puntuación: 0";
-
+  obstacleSpeed = 0.1;
+  spawnInterval = 4.5;
+  difficultyProgress = 30;
+  difficultyBar.style.width = difficultyProgress + "%";
+  
   player.position.set(0, -2, 5);
 
   obstacles.forEach(ob => scene.remove(ob));
@@ -105,6 +127,7 @@ function animate() {
   requestAnimationFrame(animate);
   let delta = clock.getDelta();
   spawnTimer += delta;
+  difficultyTimer += delta;
 
   if (!gameOver) {
     if (spawnTimer > 0.2) {
@@ -112,8 +135,20 @@ function animate() {
       spawnTimer = 0;
     }
 
+  if (difficultyTimer > 5) {
+    obstacleSpeed += 0.02;
+    if (spawnInterval > 0.25) {
+      spawnInterval -= 0.05;
+    }
+    difficultyProgress += 5;
+    if (difficultyProgress > 100) {
+      difficultyProgress = 100;
+    }
+    difficultyBar.style.width = difficultyProgress + "%";
+    difficultyTimer = 0;
+  }
     obstacles.forEach((ob, i) => {
-      ob.position.z += 0.2;
+      ob.position.z += obstacleSpeed;
 
       if (ob.position.z > 10) {
         scene.remove(ob);
