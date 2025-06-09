@@ -114,7 +114,7 @@ retryBtn.addEventListener("click", () => {
   spawnInterval = 4.5;
   difficultyProgress = 30;
   difficultyBar.style.width = difficultyProgress + "%";
-  
+  difficultyTimer = 0;
   player.position.set(0, -2, 5);
 
   obstacles.forEach(ob => scene.remove(ob));
